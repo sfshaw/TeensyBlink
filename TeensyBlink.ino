@@ -43,6 +43,7 @@ void blink() {
   on();
   delay(DELAY);
   off();
+  // please always turn off LED in each function use
 }
 
 void blink_delay(){
