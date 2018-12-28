@@ -5,6 +5,8 @@
 // give it a name:
 #define LED_PIN 13
 #define DEALY 1000
+#define MAX_DELAY 250
+#define DELTA 5
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -14,9 +16,13 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  for (int i = 1; i < 200; i  += 10) {
+  for (int i = 1; i < MAX_DELAY; i  += DELTA) {
     blink(i);
     delay(i);
+    blink(i);
+    delay(i);
+  }
+  for (int i = 1; i < MAX_DELAY; i  +=  (2 * DELTA)) {
     blink(i);
     delay(i);
   }
@@ -24,9 +30,13 @@ void loop() {
   blink(100);
   delay(100);
   blink(100);
-  delay(1500);
+  delay(MAX_DELAY * 10);
 
-  for (int i = 200; i > 0; i  -= 10) {
+  for (int i = MAX_DELAY; i > 0; i  -= (2 * DELTA)) {
+    blink(i);
+    delay(i);
+  }
+  for (int i = MAX_DELAY; i > 0; i  -= DELTA) {
     blink(i);
     delay(i);
     blink(i);
@@ -34,21 +44,21 @@ void loop() {
   }
 }
 
-blink_setup(){
+void blink_setup(){
   // initialize the digital pin as an output.
   pinMode(LED_PIN, OUTPUT);
 }
 
-void blink() {
+void blink(int i) {
   on();
-  delay(DELAY);
+  delay(i);
   off();
   // please always turn off LED in each function use
 }
 
-void blink_delay(){
+void blink_delay(int ms){
   on();
-  delay(int ms);
+  delay(ms);
   off();
 }
 void on() {
